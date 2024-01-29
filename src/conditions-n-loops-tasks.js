@@ -453,8 +453,21 @@ function getSpiralMatrix(size) {
  *    [7, 8, 9]         [9, 6, 3]
  *  ]                 ]
  */
-function rotateMatrix(/* matrix */) {
-  throw new Error('Not implemented');
+function rotateMatrix(matrix) {
+  const base = matrix;
+  const res = [];
+  for (let i = 0; i < matrix.length; i += 1) {
+    res[i] = [];
+    for (let j = 0; j < matrix.length; j += 1) {
+      res[i][j] = matrix[matrix.length - 1 - j][i];
+    }
+  }
+  for (let i = 0; i < matrix.length; i += 1) {
+    for (let j = 0; j < matrix.length; j += 1) {
+      base[i][j] = res[i][j];
+    }
+  }
+  return res;
 }
 
 /**
@@ -471,8 +484,28 @@ function rotateMatrix(/* matrix */) {
  *  [2, 9, 5, 9]    => [2, 5, 9, 9]
  *  [-2, 9, 5, -3]  => [-3, -2, 5, 9]
  */
-function sortByAsc(/* arr */) {
-  throw new Error('Not implemented');
+function sortByAsc(arr) {
+  const arr1 = arr;
+  if (arr.length <= 1) {
+    return arr;
+  }
+  const current = arr[0];
+  let moreCurrent = [];
+  let lessCurrent = [];
+  for (let i = 1; i < arr.length; i += 1) {
+    if (arr[i] >= current) {
+      moreCurrent[moreCurrent.length] = arr[i];
+    } else if (arr[i] < current) {
+      lessCurrent[lessCurrent.length] = arr[i];
+    }
+  }
+  moreCurrent = sortByAsc(moreCurrent);
+  lessCurrent = sortByAsc(lessCurrent);
+  const res = [...lessCurrent, current, ...moreCurrent];
+  for (let i = 0; i < arr.length; i += 1) {
+    arr1[i] = res[i];
+  }
+  return arr1;
 }
 
 /**
