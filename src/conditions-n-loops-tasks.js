@@ -527,20 +527,19 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let string = str;
-  for (let i = 0; i < iterations; i += 1) {
+  for (let i = 1; i <= iterations; i += 1) {
     let evenPart = '';
     let oddPart = '';
-    for (let j = 0; j < string.length; j += 1) {
+    for (let j = 0; j < str.length; j += 1) {
       if (j % 2 === 0) {
         evenPart += string[j];
-      } else {
+      }
+      if (j % 2 !== 0) {
         oddPart += string[j];
       }
     }
     string = evenPart + oddPart;
-    if (string === str) {
-      string = shuffleChar(str, iterations % i);
-    }
+    if (string === str) return shuffleChar(str, iterations % i);
   }
   return string;
 }
